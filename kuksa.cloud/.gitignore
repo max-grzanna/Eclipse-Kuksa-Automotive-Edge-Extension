@@ -1,0 +1,44 @@
+# Intellij IDEA
+.idea/
+*.iml
+
+# Eclipse
+.project
+.classpath
+.settings
+utils/hono-influxdb-connector/bin
+
+# Java
+*.class
+*.jar
+
+# Gradle
+.gradle/
+build/
+gradle/
+.gradle/
+gradlew
+gradlew.bat
+gradle-app.setting
+
+# Maven
+target/
+
+# Eclipse
+bin/
+.settings/
+.project
+.classpath
+
+
+deployment/exportStaticIpAddresses.inc
+
+# Kubernetes resources derived from Eclipse hawkBit helm chart
+deployment/eclipse-hawkbit/base/hawkbit/
+
+#MacOS file
+.DS_Store
+
+#Helm
+deployment/helm/kuksa-cloud/charts
+deployment/helm/kuksa-cloud/Chart.lock

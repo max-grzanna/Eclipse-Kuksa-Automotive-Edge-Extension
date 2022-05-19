@@ -1,0 +1,313 @@
+#!/bin/bash 
+#You need to give 2 arguments for following variables when you run this sh file. 
+HAWKBIT_IP_PORT=$1
+APPSTORE_IP_PORT=$2
+
+
+#CREATE_TARGET
+
+echo "\nstart CREATE_TARGET \n"
+
+curl "http://$HAWKBIT_IP_PORT/rest/v1/targets" -i -X POST -H 'Content-Type: application/json;charset=UTF-8' -H 'Authorization: Basic YWRtaW46YWRtaW4=' -d '[ {
+  "securityToken" : "2345678DGGDGFTDzztgf",
+  "address" : "https://192.168.0.1",
+  "controllerId" : "OEM2_device1",
+  "name" : "OEM2_device1",
+  "description" : "user1,user2"
+} ]'
+
+curl "http://$HAWKBIT_IP_PORT/rest/v1/targets" -i -X POST -H 'Content-Type: application/json;charset=UTF-8' -H 'Authorization: Basic YWRtaW46YWRtaW4=' -d '[ {
+  "securityToken" : "2345678DGGDGFTDzztgf",
+  "address" : "https://192.168.0.1",
+  "controllerId" : "OEM1_device2",
+  "name" : "OEM1_device2",
+  "description" : "user2"
+} ]'
+
+curl "http://$HAWKBIT_IP_PORT/rest/v1/targets" -i -X POST -H 'Content-Type: application/json;charset=UTF-8' -H 'Authorization: Basic YWRtaW46YWRtaW4=' -d '[ {
+  "securityToken" : "2345678DGGDGFTDzztgf",
+  "address" : "https://192.168.0.1",
+  "controllerId" : "OEM1_device3",
+  "name" : "OEM1_device3",
+  "description" : "user2"
+} ]'
+
+curl "http://$HAWKBIT_IP_PORT/rest/v1/targets" -i -X POST -H 'Content-Type: application/json;charset=UTF-8' -H 'Authorization: Basic YWRtaW46YWRtaW4=' -d '[ {
+  "securityToken" : "2345678DGGDGFTDzztgf",
+  "address" : "https://192.168.0.1",
+  "controllerId" : "OEM3_device4",
+  "name" : "OEM3_device4",
+  "description" : "user3"
+} ]'
+echo "\nend CREATE_TARGET\n"
+#-------------
+
+#Create an app category to Appstore
+echo "\nstart Create an app category to Appstore\n"
+curl "http://$APPSTORE_IP_PORT/api/1.0/appcategory" -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' --header 'Authorization: Basic YWRtaW46YWRtaW4=' -d '{ 
+"name": "Maintenance"
+}'
+
+echo "\nend Create an app to Appstore\n"
+
+
+
+#Create an app to Appstore
+echo "\nstart Create an app to Appstore\n"
+curl "http://$APPSTORE_IP_PORT/api/1.0/app" -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' --header 'Authorization: Basic YWRtaW46YWRtaW4=' -d '{ 
+"name": "app1",
+"hawkbitname": "app1",
+"description": "description for app1",
+"version": "1",
+"owner": "NETAS",
+"downloadcount": 0,
+"publishdate": "2018-10-01T06:50:03.000+0000",
+"appcategory": {
+  "id": 1
+  }
+}'
+
+curl "http://$APPSTORE_IP_PORT/api/1.0/app" -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' --header 'Authorization: Basic YWRtaW46YWRtaW4=' -d '{ 
+"name": "app2",
+"hawkbitname": "app2",
+"description": "description for app2",
+"version": "1",
+"owner": "NETAS",
+"downloadcount": 0,
+"publishdate": "2018-10-01T06:50:03.000+0000",
+"appcategory": {
+  "id": 1
+  }
+}'
+
+curl "http://$APPSTORE_IP_PORT/api/1.0/app" -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' --header 'Authorization: Basic YWRtaW46YWRtaW4=' -d '{ 
+"name": "app3",
+"hawkbitname": "app3",
+"description": "description for app3",
+"version": "1",
+"owner": "NETAS",
+"downloadcount": 0,
+"publishdate": "2018-10-01T06:50:03.000+0000",
+"appcategory": {
+  "id": 1
+  }
+}'
+
+curl "http://$APPSTORE_IP_PORT/api/1.0/app" -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' --header 'Authorization: Basic YWRtaW46YWRtaW4=' -d '{ 
+"name": "app4",
+"hawkbitname": "app4",
+"description": "description for app4",
+"version": "1",
+"owner": "NETAS",
+"downloadcount": 0,
+"publishdate": "2018-10-01T06:50:03.000+0000",
+"appcategory": {
+  "id": 1
+  }
+}'
+
+curl "http://$APPSTORE_IP_PORT/api/1.0/app" -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' --header 'Authorization: Basic YWRtaW46YWRtaW4=' -d '{ 
+"name": "app5",
+"hawkbitname": "app5",
+"description": "description for app5",
+"version": "1",
+"owner": "NETAS",
+"downloadcount": 0,
+"publishdate": "2018-10-01T06:50:03.000+0000",
+"appcategory": {
+  "id": 1
+  }
+}'
+
+curl "http://$APPSTORE_IP_PORT/api/1.0/app" -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' --header 'Authorization: Basic YWRtaW46YWRtaW4=' -d '{ 
+"name": "app6",
+"hawkbitname": "app6",
+"description": "description for app6",
+"version": "1",
+"owner": "NETAS",
+"downloadcount": 0,
+"publishdate": "2018-10-01T06:50:03.000+0000",
+"appcategory": {
+  "id": 1
+  }
+}'
+
+curl "http://$APPSTORE_IP_PORT/api/1.0/app" -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' --header 'Authorization: Basic YWRtaW46YWRtaW4=' -d '{ 
+"name": "app7",
+"hawkbitname": "app7",
+"description": "description for app7",
+"version": "1",
+"owner": "NETAS",
+"downloadcount": 0,
+"publishdate": "2018-10-01T06:50:03.000+0000",
+"appcategory": {
+  "id": 1
+  }
+}'
+
+curl "http://$APPSTORE_IP_PORT/api/1.0/app" -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' --header 'Authorization: Basic YWRtaW46YWRtaW4=' -d '{ 
+"name": "app8",
+"hawkbitname": "app8",
+"description": "description for app8",
+"version": "1",
+"owner": "NETAS",
+"downloadcount": 0,
+"publishdate": "2018-10-01T06:50:03.000+0000",
+"appcategory": {
+  "id": 1
+  }
+}'
+
+curl "http://$APPSTORE_IP_PORT/api/1.0/app" -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' --header 'Authorization: Basic YWRtaW46YWRtaW4=' -d '{
+"name": "app9",
+"hawkbitname": "app9",
+"description": "description for app9",
+"version": "1",
+"owner": "NETAS",
+"downloadcount": 0,
+"publishdate": "2018-10-01T06:50:03.000+0000",
+"appcategory": {
+  "id": 1
+  }
+}'
+
+echo "\nend Create an app to Appstore\n"
+#-------------
+#Create an OEM to Appstore
+echo "\nstart Create an OEM to Appstore\n"
+curl "http://$APPSTORE_IP_PORT/api/1.0/oem" -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' --header 'Authorization: Basic YWRtaW46YWRtaW4=' -d '{ 
+   "name": "OEM1"
+ }'
+
+curl "http://$APPSTORE_IP_PORT/api/1.0/oem" -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' --header 'Authorization: Basic YWRtaW46YWRtaW4=' -d '{ 
+   "name": "OEM2"
+ }'
+
+curl "http://$APPSTORE_IP_PORT/api/1.0/oem" -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' --header 'Authorization: Basic YWRtaW46YWRtaW4=' -d '{ 
+   "name": "OEM3"
+ }'  
+echo "\nend Create an OEM to Appstore\n"
+
+#-------------
+#Create User to Appstore
+echo "\nstart Create User to Appstore\n"
+
+curl "http://$APPSTORE_IP_PORT/api/1.0/user" -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' --header 'Authorization: Basic YWRtaW46YWRtaW4=' -d '{
+   "username": "user1",
+   "password": "user1",
+   "userType": "Normal",
+   "oem": null,
+   "members": []
+ }'
+ 
+curl "http://$APPSTORE_IP_PORT/api/1.0/user" -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' --header 'Authorization: Basic YWRtaW46YWRtaW4=' -d '{
+   "username": "user2",
+   "password": "user2",
+   "userType": "Normal",
+   "oem": null,
+   "members": []
+ }'
+ 
+curl "http://$APPSTORE_IP_PORT/api/1.0/user" -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' --header 'Authorization: Basic YWRtaW46YWRtaW4=' -d '{
+   "username": "user3",
+   "password": "user3",
+   "userType": "Normal",
+   "oem": null,
+   "members": []
+ }' 
+curl "http://$APPSTORE_IP_PORT/api/1.0/user" -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' --header 'Authorization: Basic YWRtaW46YWRtaW4=' -d '{
+   "username": "org1",
+   "password": "org1",
+   "userType": "GroupAdmin",
+   "oem": null,
+   "members": [
+     {
+       "id": 3
+     }
+   ]
+ }'
+curl "http://$APPSTORE_IP_PORT/api/1.0/user" -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' --header 'Authorization: Basic YWRtaW46YWRtaW4=' -d '{
+   "username": "org2",
+   "password": "org2",
+   "userType": "GroupAdmin",
+   "oem": null,
+   "members": [
+     {
+       "id": 4
+     },{
+       "id": 5
+     }
+   ]
+ }' 
+curl "http://$APPSTORE_IP_PORT/api/1.0/user" -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' --header 'Authorization: Basic YWRtaW46YWRtaW4=' -d '{
+   "username": "org3",
+   "password": "org3",
+   "userType": "GroupAdmin",
+   "oem": null,
+   "members": [
+     {
+       "id": 6
+     }
+   ]
+ }'
+curl "http://$APPSTORE_IP_PORT/api/1.0/user" -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' --header 'Authorization: Basic YWRtaW46YWRtaW4=' -d '{
+   "username": "org4",
+   "password": "org4",
+   "userType": "GroupAdmin",
+   "oem": {
+    "id": 1
+	},
+   "members": []
+ }'
+curl "http://$APPSTORE_IP_PORT/api/1.0/user" -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' --header 'Authorization: Basic YWRtaW46YWRtaW4=' -d '{
+   "username": "org5",
+   "password": "org5",
+   "userType": "GroupAdmin",
+   "oem": {
+    "id": 2
+	},
+   "members": []
+ }'
+curl "http://$APPSTORE_IP_PORT/api/1.0/user" -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' --header 'Authorization: Basic YWRtaW46YWRtaW4=' -d '{
+   "username": "org6",
+   "password": "org6",
+   "userType": "GroupAdmin",
+   "oem": {
+    "id": 3
+	},
+   "members": []
+ }'   
+echo "\nend Create User to Appstore\n"
+#-------------
+#Purchase App for an user on Appstore
+echo "\nstart Purchase App for an user on Appstore\n"
+
+curl "http://$APPSTORE_IP_PORT/api/1.0/app/1/purchase/2" -X POST --header 'Accept: application/json' --header 'Authorization: Basic YWRtaW46YWRtaW4='
+
+curl "http://$APPSTORE_IP_PORT/api/1.0/app/1/purchase/3" -X POST --header 'Accept: application/json' --header 'Authorization: Basic YWRtaW46YWRtaW4='
+
+curl "http://$APPSTORE_IP_PORT/api/1.0/app/1/purchase/5" -X POST --header 'Accept: application/json' --header 'Authorization: Basic YWRtaW46YWRtaW4='
+
+curl "http://$APPSTORE_IP_PORT/api/1.0/app/2/purchase/3" -X POST --header 'Accept: application/json' --header 'Authorization: Basic YWRtaW46YWRtaW4='
+
+curl "http://$APPSTORE_IP_PORT/api/1.0/app/2/purchase/6" -X POST --header 'Accept: application/json' --header 'Authorization: Basic YWRtaW46YWRtaW4='
+
+curl "http://$APPSTORE_IP_PORT/api/1.0/app/3/purchase/3" -X POST --header 'Accept: application/json' --header 'Authorization: Basic YWRtaW46YWRtaW4='
+
+curl "http://$APPSTORE_IP_PORT/api/1.0/app/3/purchase/4" -X POST --header 'Accept: application/json' --header 'Authorization: Basic YWRtaW46YWRtaW4='
+
+curl "http://$APPSTORE_IP_PORT/api/1.0/app/4/purchase/5" -X POST --header 'Accept: application/json' --header 'Authorization: Basic YWRtaW46YWRtaW4='
+
+curl "http://$APPSTORE_IP_PORT/api/1.0/app/5/purchase/6" -X POST --header 'Accept: application/json' --header 'Authorization: Basic YWRtaW46YWRtaW4='
+
+curl "http://$APPSTORE_IP_PORT/api/1.0/app/6/purchase/7" -X POST --header 'Accept: application/json' --header 'Authorization: Basic YWRtaW46YWRtaW4='
+
+curl "http://$APPSTORE_IP_PORT/api/1.0/app/7/purchase/8" -X POST --header 'Accept: application/json' --header 'Authorization: Basic YWRtaW46YWRtaW4='
+
+curl "http://$APPSTORE_IP_PORT/api/1.0/app/8/purchase/9" -X POST --header 'Accept: application/json' --header 'Authorization: Basic YWRtaW46YWRtaW4='
+
+curl "http://$APPSTORE_IP_PORT/api/1.0/app/9/purchase/10" -X POST --header 'Accept: application/json' --header 'Authorization: Basic YWRtaW46YWRtaW4='
+
+
+
+echo "\nend Purchase App for an user on Appstore\n"

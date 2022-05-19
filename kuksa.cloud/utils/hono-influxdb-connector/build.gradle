@@ -1,0 +1,30 @@
+/*********************************************************************
+ * Copyright (c) 2019 Bosch Software Innovations GmbH [and others]
+ *
+ * This program and the accompanying materials are made
+ * available under the terms of the Eclipse Public License 2.0
+ * which is available at https://www.eclipse.org/legal/epl-2.0/
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ **********************************************************************/
+
+plugins {
+    id 'java'
+    id 'application'
+    id 'org.springframework.boot' version '2.5.2'
+}
+
+repositories {
+    mavenCentral()
+}
+
+version = '0.2.0'
+mainClassName = 'org.eclipse.kuksa.honoConnector.HonoInfluxConnectorApplication'
+
+dependencies {
+    implementation 'org.eclipse.hono:hono-client-application-amqp:1.8.0'
+    implementation 'org.influxdb:influxdb-java:2.21'
+    implementation 'org.springframework.boot:spring-boot-starter:2.5.2'
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test:2.5.2'
+}
