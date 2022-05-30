@@ -1,0 +1,12 @@
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+#MacOS file
+.DS_Store
+
+#Helm
+kuksa.cloud/deployment/helm/kuksa-cloud/charts
+deployment/helm/kuksa-cloud/Chart.lock

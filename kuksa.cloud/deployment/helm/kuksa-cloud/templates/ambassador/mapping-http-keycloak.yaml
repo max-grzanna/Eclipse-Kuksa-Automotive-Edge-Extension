@@ -8,8 +8,8 @@
 # SPDX-License-Identifier: EPL-2.0
 ########################################################################
 {{ if and .Values.components.ambassador.enabled .Values.dns.enabled }}
-apiVersion: getambassador.io/v2
-kind:  Mapping
+apiVersion: getambassador.io/v3alpha1
+kind:  TCPMapping
 metadata:
   name:  {{.Release.Name}}-http-keycloak
 spec:

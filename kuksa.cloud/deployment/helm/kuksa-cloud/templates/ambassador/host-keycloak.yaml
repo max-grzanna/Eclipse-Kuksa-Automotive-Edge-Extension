@@ -9,7 +9,7 @@
 ########################################################################
 {{if and .Values.components.certmanager.enabled .Values.components.ambassador.enabled .Values.dns.enabled}}
 {{if or .Values.certificates.sslForTcpMappings .Values.certificates.sslForHttpMappings}}
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: Host
 metadata:
   name: {{.Release.Name}}-host

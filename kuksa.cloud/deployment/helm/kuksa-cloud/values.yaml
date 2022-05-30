@@ -9,9 +9,9 @@
 ########################################################################
 # credentials for the registry hosting privat container images (e.g. Hono-InfluxDB-Connector)
 imageCredentials:
-  registry: 
-  username: 
-  password: 
+  registry:
+  username:
+  password:
 
 # sets the domain for the hosts used for the API gateway (Ambassador)
 dns:
@@ -42,7 +42,7 @@ appstore:
   image: kuksa-appstore
   service:
     type: ClusterIP
-  credentials: 
+  credentials:
     username: admin
     password: admin
   hawkbit:
@@ -59,7 +59,7 @@ appstore:
       # the secret can be set and generated for the client used by the app store in the mangement UI of Keycloak
       secret: "secret"
   vaadinProductionModeEnabled: "true"
-    
+
 
 # control which dependencies should be deployed (enabled: true)
 components:
@@ -94,35 +94,46 @@ keycloak:
     service:
       type: ClusterIP
 
-ambassador:
+emissary-ingress:
   replicaCount: 2
-  enableAES: false
-  image:
-      repository: docker.io/datawire/ambassador
   service:
-    ports: [{"name": "http","port": 80,"targetPort": 8080},{"name": "https","port": 443,"targetPort": 8443},{"name": "grafana","port": 3000,"targetPort": 3000}, {"name": "hawkbit","port": 38080,"targetPort": 38080}, {"name": "influxdb","port": 8086,"targetPort": 8086}, {"name": "keycloak","port": 48080,"targetPort": 48080}, {"name": "mqtt-adapter","port": 1883,"targetPort": 1883}, {"name": "http-adapter","port": 18080,"targetPort": 18080}, {"name": "app-store","port": 58080,"targetPort": 58080}, {"name": "dispatch-router","port": 5671,"targetPort": 15671}, {"name": "device-registry","port": 28080,"targetPort": 28080}]
-    http:
-      enabled: true
-      port: 80
-      targetPort: 80
-    https:
-      port: 8443
-      targetPort: 8443
+    ports:
+      - name: grafana
+        port: 3000
+        targetPort: 3000
+      - name: hawkbit
+        port: 38080
+        targetPort: 38080
+      - name: influxdb
+        port: 8086
+        targetPort: 8086
+      - name: keycloak
+        port: 48080
+        targetPort: 48080
+      - name: mqtt-adapter
+        port: 1883
+        targetPort: 1883
+      - name: http-adapter
+        port: 18080
+        targetPort: 18080
+      - name: app-store
+        port: 58080
+        targetPort: 58080
+      - name: dispatch-router
+        port: 5671
+        targetPort: 15671
+      - name: device-registry
+        port: 28080
+        targetPort: 28080
     loadBalancerIP: localhost
-    # The annotations are specific to the Cloud provider (see https://kubernetes.io/docs/concepts/services-networking/service/#loadbalancer ). The default annotation in this chart is suited for Azure to allow the assignment of an Azure managed IP-address to the LoadBalancer service of the Ambassador. One needs to replace "kuksa" with the actual name of the resource group of the IP-address assigned in 'loadBalancerIP' and allow the service principle for the AKS to access the IP-address. For more information see https://docs.microsoft.com/en-us/azure/aks/static-ip. 
-    annotations: 
-      service.beta.kubernetes.io/azure-load-balancer-resource-group: "azure-resource-group"
 
-    cert-manager:
-      installCRDs: true
-
-    #The cert manager is used to request certificates from Let's encrypt using ACME with a DNS-01 challeng. For more information visit https://cert-manager.io/docs/configuration/acme/dns01/ or consult the Readme file. For this Chart we assume that the Kuksa Cloud is hosted in an Azure environment. An introduction of the required information for the ACME challenge in Azure and how to obtain those values is available under: https://cert-manager.io/docs/configuration/acme/dns01/azuredns/. If you are using another environment for managing your DNS entries, you need to adapt the respective issuer in templates/cert-manager.
+#The cert manager is used to request certificates from Let's encrypt using ACME with a DNS-01 challeng. For more information visit https://cert-manager.io/docs/configuration/acme/dns01/ or consult the Readme file. For this Chart we assume that the Kuksa Cloud is hosted in an Azure environment. An introduction of the required information for the ACME challenge in Azure and how to obtain those values is available under: https://cert-manager.io/docs/configuration/acme/dns01/azuredns/. If you are using another environment for managing your DNS entries, you need to adapt the respective issuer in templates/cert-manager.
 certificates:
   productionCertificate: false
   sslForTcpMappings: false
   sslForHttpMappings: false
-  azureSubscriptionId: 
-  azureTenantId: 
-  azureResourceGroup: 
-  azureSpId: 
+  azureSubscriptionId:
+  azureTenantId:
+  azureResourceGroup:
+  azureSpId:
   azureSpPassword: 
