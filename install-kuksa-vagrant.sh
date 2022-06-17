@@ -4,23 +4,9 @@ set -o errexit
 set -o nounset
 
 DIR="$(cd "$(dirname "$0")" && pwd)"
+namespace="kuksa"
+releaseName="kuksa-cloud"
 
-printf "Install Helm? (Y/n) "
-read -r installHelm
-
-printf 'Do you want a custom release name? [\x1b[36mLeave blank for "kuksa-cloud"\x1b[0m]: '
-read -r releaseName
-
-if [[ -z "$releaseName" ]]; then
-  releaseName="kuksa-cloud"
-fi
-
-printf 'Custom namespace for kuksa installation? [\x1b[36mLeave blank for "kuksa"\x1b[0m]: '
-read -r namespace
-
-if [[ -z "$namespace" ]]; then
-  namespace="kuksa"
-fi
 
 # installing k3s without traefik (we use emissary ingress instead)
 curl -sfL https://get.k3s.io | K3S_KUBECONFIG_MODE="644" INSTALL_K3S_EXEC="--disable=traefik" sh -
@@ -29,12 +15,10 @@ curl -sfL https://get.k3s.io | K3S_KUBECONFIG_MODE="644" INSTALL_K3S_EXEC="--dis
 export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 
 # Installing Helm
-if [[ $installHelm == 'Y' ]]; then
-  curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
-  chmod 700 get_helm.sh
-  "$DIR"/get_helm.sh
-  rm get_helm.sh
-fi
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+chmod 700 get_helm.sh
+"$DIR"/get_helm.sh
+rm get_helm.sh
 
 cd kuksa.cloud/deployment/helm/
 helm dep up kuksa-cloud/

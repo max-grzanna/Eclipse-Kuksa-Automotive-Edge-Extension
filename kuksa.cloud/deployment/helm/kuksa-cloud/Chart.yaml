@@ -47,6 +47,9 @@ dependencies:
       version: ^7.2.0
       repository: https://app.getambassador.io/
       condition: components.ambassador.enabled
+# - name: ditto
+#   version: 2.5.2
+#   repository: https://www.eclipse.org/packages/charts
 #    - name: cert-manager
 #      version: ~0.15.2
 #      repository: https://charts.jetstack.io

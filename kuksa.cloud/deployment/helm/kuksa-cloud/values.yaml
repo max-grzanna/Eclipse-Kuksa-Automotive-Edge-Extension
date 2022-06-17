@@ -81,9 +81,9 @@ hono:
   useLoadBalancer: false
   adapters:
     amqp:
-      enabled: false
+      enabled: true
     mqtt:
-      enabled: false
+      enabled: true
 
 # configure the values from the Keycloak chart fetched from https://github.com/codecentric/helm-charts/tree/master/charts/keycloak
 keycloak:
