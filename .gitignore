@@ -7,6 +7,9 @@
 #MacOS file
 .DS_Store
 
+#vagrant
+.vagrant/
+
 #Helm
 kuksa.cloud/deployment/helm/kuksa-cloud/charts
 deployment/helm/kuksa-cloud/Chart.lock

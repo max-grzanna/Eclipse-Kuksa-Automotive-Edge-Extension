@@ -28,8 +28,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     kuksa.vm.provider :virtualbox do |v|
       v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
-      v.memory = 2048
-      v.cpus = 2
+      # v.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
+      v.memory = 4096
+      v.cpus = 4
       v.customize ["modifyvm", :id, "--name", "kuksa"]
     end
 
