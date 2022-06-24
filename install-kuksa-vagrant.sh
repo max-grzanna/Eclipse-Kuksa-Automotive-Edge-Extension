@@ -11,8 +11,6 @@ function installChart() {
   kubectl delete namespace "$namespace"
   kubectl create namespace "$namespace"
   helm install "$releaseName" --namespace "$namespace" kuksa-cloud/
-
-  return $?
 }
 
 # Install packages
@@ -48,10 +46,10 @@ export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 
 # installing charts
 kubectl create namespace "$namespace" &&
-  kubectl apply -f https://app.getambassador.io/yaml/emissary/2.3.1/emissary-crds.yaml --insecure-skip-tls-verify
+  kubectl apply -f https://app.getambassador.io/yaml/emissary/2.3.1/emissary-crds.yaml
 kubectl wait --timeout=90s --for=condition=available deployment emissary-apiext -n emissary-system
 helm install "$releaseName" --namespace "$namespace" kuksa-cloud/ &&
-  kubectl -n "$namespace" wait --for condition=available --timeout=90s deploy -lapp.kubernetes.io/instance=emissary-ingress
+  kubectl -n kuksa wait --for condition=available --timeout=90s deploy -lapp.kubernetes.io/instance=emissary-ingress
 
 
 # TODO: Background job workaround (keeps failing for the first time executed)

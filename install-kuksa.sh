@@ -41,10 +41,10 @@ helm dep up kuksa-cloud/
 
 # installing charts
 kubectl create namespace "$namespace" &&
-kubectl apply -f https://app.getambassador.io/yaml/emissary/2.2.2/emissary-crds.yaml
+  kubectl apply -f https://app.getambassador.io/yaml/emissary/2.3.1/emissary-crds.yaml
 kubectl wait --timeout=90s --for=condition=available deployment emissary-apiext -n emissary-system
-helm install "$releaseName" --namespace "$namespace"  kuksa-cloud/ &&
-kubectl -n "$namespace"  wait --for condition=available --timeout=90s deploy -lapp.kubernetes.io/instance=emissary-ingress
+helm install "$releaseName" --namespace "$namespace" kuksa-cloud/ &&
+  kubectl -n kuksa wait --for condition=available --timeout=90s deploy -lapp.kubernetes.io/instance=emissary-ingress
 
 if [ $? -eq 0 ]; then
   exit
@@ -52,5 +52,5 @@ else
   echo -e '\x1b[93mRetrying to install the chart...\x1b[0m \n'
   kubectl delete namespace "$namespace"
   kubectl create namespace "$namespace"
-  helm install "$releaseName" --namespace "$namespace"  kuksa-cloud/
+  helm install "$releaseName" --namespace "$namespace" kuksa-cloud/
 fi
