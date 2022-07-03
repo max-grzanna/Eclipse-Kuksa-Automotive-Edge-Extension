@@ -1,10 +1,10 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 echo "Provisioning..."
 sudo apt-get update
 
-echo "INSTALL CURL"
-sudo apt-get -y install curl
+echo "Installing dependencies..."
+sudo apt-get -y install curl python3-pip vim
 
 echo "GET CONTAINERD DEBIAN PACKAGES"
 curl -fsSL https://github.com/eclipse-kanto/kanto/raw/main/quickstart/install_ctrd.sh | sh
@@ -19,3 +19,11 @@ suite-connector.service \
 container-management.service \
 software-update.service \
 file-upload.service
+
+mkdir quickstart && cd quickstart && \
+wget https://github.com/eclipse-kanto/kanto/raw/main/quickstart/hono_commands.py && \
+wget https://github.com/eclipse-kanto/kanto/raw/main/quickstart/hono_events.py && \
+wget https://github.com/eclipse-kanto/kanto/raw/main/quickstart/requirements.txt && \
+wget https://github.com/eclipse-kanto/kanto/raw/main/quickstart/hono_provisioning.sh
+
+pip3 install -r requirements.txt

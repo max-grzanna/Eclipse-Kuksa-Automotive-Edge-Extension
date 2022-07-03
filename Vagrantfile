@@ -4,7 +4,7 @@
 VAGRANTFILE_API_VERSION = "2"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define "kanto" do |kanto|
-    kanto.vm.box = "debian/bullseye64"
+    kanto.vm.box = "bento/debian-11"
     kanto.vm.hostname = 'kanto'
 
     kanto.vm.network :private_network, ip: "192.168.56.101"
@@ -14,6 +14,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       v.memory = 2048
       v.cpus = 2
       v.customize ["modifyvm", :id, "--name", "kanto"]
+      v.customize ["modifyvm", :id, "--ioapic", "on"]
     end
 
     kanto.vm.provision "shell", path: "install-kanto.sh"
@@ -21,7 +22,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   config.vm.define "kuksa" do |kuksa|
-    kuksa.vm.box = "debian/bullseye64"
+    kuksa.vm.box = "bento/debian-11"
     kuksa.vm.hostname = 'kuksa'
 
     kuksa.vm.network :private_network, ip: "192.168.56.102"
@@ -29,9 +30,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     kuksa.vm.provider :virtualbox do |v|
       v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
       # v.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
-      v.memory = 4096
+      v.memory = 8192
       v.cpus = 4
       v.customize ["modifyvm", :id, "--name", "kuksa"]
+      v.customize ["modifyvm", :id, "--ioapic", "on"]
     end
 
     kuksa.vm.provision "shell", path: "install-kuksa-vagrant.sh"

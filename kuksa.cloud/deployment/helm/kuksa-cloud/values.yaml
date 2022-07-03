@@ -68,7 +68,7 @@ components:
   influxdb:
     enabled: true
   hawkbit:
-    enabled: true
+    enabled: false
   keycloak:
     enabled: false
   ambassador:

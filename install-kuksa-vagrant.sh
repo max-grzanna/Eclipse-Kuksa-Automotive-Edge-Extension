@@ -19,6 +19,7 @@ sudo apt-get -y install curl git resolvconf
 
 # set google dns server in order to resolve hosts like https://app.getambassador.io
 echo "nameserver 8.8.8.8" >>/etc/resolvconf/resolv.conf.d/head
+echo "nameserver 8.8.4.4" >>/etc/resolvconf/resolv.conf.d/head
 sudo systemctl restart resolvconf.service
 sudo systemctl restart systemd-resolved.service
 
@@ -42,8 +43,6 @@ git clone https://github.com/max-grzanna/Eclipse-Kuksa-Automotive-Edge-Extension
 cd Eclipse-Kuksa-Automotive-Edge-Extension/kuksa.cloud/deployment/helm/
 helm dep up kuksa-cloud/
 
-export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
-
 # installing charts
 kubectl create namespace "$namespace" &&
   kubectl apply -f https://app.getambassador.io/yaml/emissary/2.3.1/emissary-crds.yaml
@@ -58,3 +57,7 @@ if [ $EXIT_STATUS -ne 0 ]; then
   echo -e '\x1b[93mRetrying to install the chart...\x1b[0m \n'
   installChart
 fi
+
+export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
+
+exit
