@@ -3,6 +3,9 @@
 set -o errexit
 set -o nounset
 
+sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
+sudo swapoff -a
+
 DIR="$(cd "$(dirname "$0")" && pwd)"
 namespace="kuksa"
 releaseName="kuksa-cloud"
@@ -31,6 +34,10 @@ curl -sfL https://get.k3s.io | K3S_KUBECONFIG_MODE="644" INSTALL_K3S_EXEC="--dis
 
 # Cluster access
 export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
+export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
+
+# utils
+alias k ='kubectl'
 
 # Installing Helm
 curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
@@ -57,7 +64,3 @@ if [ $EXIT_STATUS -ne 0 ]; then
   echo -e '\x1b[93mRetrying to install the chart...\x1b[0m \n'
   installChart
 fi
-
-export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
-
-exit
