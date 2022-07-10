@@ -18,7 +18,7 @@ function installChart() {
 
 # Install packages
 sudo apt-get update
-sudo apt-get -y install curl git resolvconf
+sudo apt-get -y install curl resolvconf vim
 
 # set google dns server in order to resolve hosts like https://app.getambassador.io
 echo "nameserver 8.8.8.8" >>/etc/resolvconf/resolv.conf.d/head
@@ -32,17 +32,14 @@ sudo systemctl enable resolvconf.service
 # installing k3s without traefik (we use emissary ingress instead)
 curl -sfL https://get.k3s.io | K3S_KUBECONFIG_MODE="644" INSTALL_K3S_EXEC="--disable=traefik" sh -
 
-# Cluster access
-export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
-export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
-
 # Installing Helm
 curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
 chmod 700 get_helm.sh
 ./get_helm.sh
 rm get_helm.sh
 
-git clone https://github.com/max-grzanna/Eclipse-Kuksa-Automotive-Edge-Extension.git Eclipse-Kuksa-Automotive-Edge-Extension
+# Cluster access
+export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 
 cd Eclipse-Kuksa-Automotive-Edge-Extension/kuksa.cloud/deployment/helm/
 helm dep up kuksa-cloud/
