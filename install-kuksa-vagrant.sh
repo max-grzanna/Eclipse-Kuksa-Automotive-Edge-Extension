@@ -46,7 +46,7 @@ helm dep up kuksa-cloud/
 
 # installing charts
 kubectl create namespace "$namespace" &&
-  kubectl apply -f https://app.getambassador.io/yaml/emissary/2.3.1/emissary-crds.yaml
+  kubectl apply -f https://app.getambassador.io/yaml/emissary/3.0.0/emissary-crds.yaml
 kubectl wait --timeout=90s --for=condition=available deployment emissary-apiext -n emissary-system
 helm install "$releaseName" --namespace "$namespace" kuksa-cloud/ &&
   kubectl -n kuksa wait --for condition=available --timeout=90s deploy -lapp.kubernetes.io/instance=emissary-ingress

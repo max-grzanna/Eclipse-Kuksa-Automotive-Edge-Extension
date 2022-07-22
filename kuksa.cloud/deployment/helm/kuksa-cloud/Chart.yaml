@@ -47,9 +47,10 @@ dependencies:
       version: ^7.2.0
       repository: https://app.getambassador.io/
       condition: components.ambassador.enabled
-# - name: ditto
-#   version: 2.5.2
-#   repository: https://www.eclipse.org/packages/charts
+    - name: cloud2edge
+      version: ^0.2.4
+      repository: https://eclipse.org/packages/charts
+      condition: components.cloud2edge.enabled
 #    - name: cert-manager
 #      version: ~0.15.2
 #      repository: https://charts.jetstack.io
