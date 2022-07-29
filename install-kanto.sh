@@ -1,10 +1,9 @@
 #!/usr/bin/env bash
 
-echo "Provisioning..."
 sudo apt-get update
 
 echo "Installing dependencies..."
-sudo apt-get -y install curl python3-pip vim
+sudo apt-get -y install curl python3-pip vim iptables
 
 echo "GET CONTAINERD DEBIAN PACKAGES"
 curl -fsSL https://github.com/eclipse-kanto/kanto/raw/main/quickstart/install_ctrd.sh | sh
