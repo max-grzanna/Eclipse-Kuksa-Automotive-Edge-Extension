@@ -28,7 +28,8 @@ spec:
         version: {{ .Chart.AppVersion }}
     spec:
       containers:
-      - image: "{{ .Values.imageCredentials.registry }}/{{.Values.connector.image}}:v1"
+        # Replaced with latest, v1 was default
+      - image: "{{ .Values.imageCredentials.registry }}/{{.Values.connector.image}}:latest"
         name: "{{ .Release.Name }}-connector"
         imagePullPolicy: {{ .Values.connector.imagePullPolicy }}
         envFrom:

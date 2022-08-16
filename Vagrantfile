@@ -11,13 +11,16 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     kanto.vm.provider :virtualbox do |v|
       v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
-            v.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
+      v.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
+      v.customize ["modifyvm", :id, "--uart1", "0x3F8", "4"]
+      v.customize ["modifyvm", :id, "--uartmode1", "file", File::NULL]
       v.memory = 2048
       v.cpus = 2
       v.customize ["modifyvm", :id, "--name", "kanto"]
       v.customize ["modifyvm", :id, "--ioapic", "on"]
     end
-
+    kanto.vm.provision "file", source: "config.json", destination: "$HOME/"
+    kanto.vm.provision "file", source: "docker-registry", destination: "$HOME/"
     kanto.vm.provision "shell", path: "install-kanto.sh"
 
   end

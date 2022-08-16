@@ -9,9 +9,9 @@
 ########################################################################
 # credentials for the registry hosting privat container images (e.g. Hono-InfluxDB-Connector)
 imageCredentials:
-  registry: ghcr.io/max-grzanna
-  username: max-grzanna
-  password: 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
+  registry:
+  username:
+  password:
 
 # sets the domain for the hosts used for the API gateway (Ambassador)
 dns:
